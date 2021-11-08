@@ -8,6 +8,12 @@ const ServerService = {
       .get(SERVER_URL)
       .then((response) => response.data)
       .catch(errorHandler);
+  },
+  fetchServerMovieById(id) {
+    return axios
+      .get(`${SERVER_URL}/${id}`)
+      .then((response) => response.data)
+      .catch(errorHandler);
   }
   //   add(movie) {
   //     return axios
