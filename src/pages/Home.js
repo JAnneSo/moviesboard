@@ -1,30 +1,90 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import Navigation from "../components/Navigation";
 import ServerService from "../services/ServerService";
 
 const Home = () => {
+  // Variables
   const [movies, setMovies] = useState(null);
-  const [display, setDisplay] = useState(false);
+  const searchInputRef = useRef();
+  const filterRef = useRef();
 
-  useEffect(() => {
-    ServerService.fetchServerMovies().then((moviesData) => {
-      console.log(typeof moviesData);
-      if (typeof moviesData === String) {
-        setMovies(moviesData);
-        setDisplay(true);
+  /**
+   * @function
+   * @description
+   * @param
+   */
+  const fetchAllMovies = () => {
+    ServerService.fetchServerMovies().then((response) => {
+      if (response !== "") {
+        setMovies(response);
       }
     });
+  };
+  // Fetch movies saved in server once
+  useEffect(() => {
+    fetchAllMovies();
   }, []);
+
+  const fetchByFilter = (filter, searchValue) => {
+    if (searchValue !== "") {
+      ServerService.fetchServerMovies(filter, searchValue).then((response) => {
+        setMovies(response);
+      });
+    }
+  };
+
+  /**
+   * @function changeFilter
+   * @description update the filter parameter and fetch the corresponding data
+   * @param {event} e
+   */
+  const changeFilter = (e) => {
+    filterRef.current.value = e.target.value;
+    if (filterRef.current.value === "tous") {
+      fetchAllMovies();
+    } else {
+      if (searchInputRef.current.value !== "") {
+        fetchByFilter(filterRef.current.value, searchInputRef.current.value);
+      }
+    }
+  };
+
+  const onKeyDown = (e) => {
+    // Click to Enter => fetch data
+    if (e.keyCode === 13) {
+      if (e.target.value !== "") {
+        fetchByFilter(filterRef.current.value, searchInputRef.current.value);
+      }
+    }
+  };
 
   return (
     <div>
       <Navigation></Navigation>
-      {display && (
+      <h1>Welcome</h1>
+      <input
+        type="search"
+        ref={searchInputRef}
+        placeholder="Rechercher..."
+        onKeyDown={onKeyDown}
+      />
+      <label>Filtrer par :</label>
+      <select ref={filterRef} onChange={changeFilter} defaultValue="title_like">
+        <option value="tous">Tous</option>
+        <option value="title_like">Titre</option>
+        <option value="release_date_like">Date de sortie</option>
+        <option value="categories_like">Catégories</option>
+      </select>
+
+      {movies && (
         <div>
-          <h1>Welcome</h1>
-          {movies &&
+          {movies.length !== 0 &&
             movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+          {movies.length === 0 && <h2>Aucun film trouvé 🥺</h2>}
+          {movies === "" && (
+            <h2>Une erreur s'est produite. Réessayez plus tard 😉</h2>
+          )}
         </div>
       )}
     </div>
