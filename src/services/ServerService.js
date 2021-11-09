@@ -31,8 +31,8 @@ const ServerService = {
   //   }
 };
 const errorHandler = (err) => {
-  console.log(err);
-  return err;
+  console.log(err, err.message);
+  return err.message;
 };
 
 export default ServerService;

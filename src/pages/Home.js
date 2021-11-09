@@ -5,20 +5,28 @@ import ServerService from "../services/ServerService";
 
 const Home = () => {
   const [movies, setMovies] = useState(null);
+  const [display, setDisplay] = useState(false);
 
   useEffect(() => {
     ServerService.fetchServerMovies().then((moviesData) => {
-      setMovies(moviesData);
-      console.log(moviesData);
+      console.log(typeof moviesData);
+      if (typeof moviesData === String) {
+        setMovies(moviesData);
+        setDisplay(true);
+      }
     });
   }, []);
 
   return (
     <div>
       <Navigation></Navigation>
-      <h1>Welcome</h1>
-      {movies &&
-        movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+      {display && (
+        <div>
+          <h1>Welcome</h1>
+          {movies &&
+            movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+        </div>
+      )}
     </div>
   );
 };
