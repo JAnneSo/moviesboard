@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import TMDBService, { base_image_url } from "../services/TMDBService";
-import ActorCard from "./ActorCard";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const Form = () => {
+const Form = (props) => {
   // FORM VARIABLES
   const [formStep, setFormStep] = useState(0);
   const [movieChoices, setMovieChoices] = useState(null);
@@ -29,18 +28,21 @@ const Form = () => {
     description: yup.string().required("Le synopsis est requis"),
     actors: yup.array().of(
       yup.object({
-        name: yup.string().required(),
+        name: yup.string(),
         photo: yup.string().url(),
-        character: yup.string().required()
+        character: yup.string()
       })
     ),
-    similar_movies: yup.array().of(
-      yup.object({
-        title: yup.string().required(),
-        poster: yup.string().url(),
-        release_date: yup.string().required()
-      })
-    )
+    similar_movies: yup
+      .array()
+      .of(
+        yup.object({
+          title: yup.string(),
+          poster: yup.string().url(),
+          release_date: yup.string()
+        })
+      )
+      .required()
   });
   const formOptions = {
     resolver: yupResolver(validationSchema),
@@ -51,16 +53,8 @@ const Form = () => {
     }
   };
 
-  const {
-    watch,
-    register,
-    setValue,
-    getValues,
-    trigger,
-    handleSubmit,
-    reset,
-    formState
-  } = useForm(formOptions);
+  const { watch, register, setValue, trigger, handleSubmit, reset, formState } =
+    useForm(formOptions);
   const { errors } = formState;
 
   const completeFormStep = () => {
@@ -70,13 +64,9 @@ const Form = () => {
     setFormStep((cur) => cur - 1);
   };
 
-  console.log(formStep);
-
   // ----------------------------
   // FETCH MOVIES
   function onKeyDown(e) {
-    console.log(register("title"));
-    console.log(e.target.value);
     if (e.target.value.trim() !== "") {
       TMDBService.fetchMovies(e.target.value).then((response) => {
         response.splice(5);
@@ -87,11 +77,9 @@ const Form = () => {
   function onClick(event) {
     setValue("title", event.target.innerHTML.split("<span")[0]);
     setMovieChoices(null);
-    console.log(watch());
     // Au click sur next
     TMDBService.fetchMovieById(event.target.id).then((response) => {
       setSelectedMovie(response);
-      console.log(response);
     });
     TMDBService.fetchActorsInMovie(event.target.id)
       .then((response) => response)
@@ -113,11 +101,10 @@ const Form = () => {
       setValue("poster", base_image_url + selectedMovie.poster_path);
       setValue("description", selectedMovie.overview);
     }
-  }, [selectedMovie]);
+  }, [selectedMovie, setValue]);
 
   async function checkFirstStep() {
     const bool = await trigger(["title", "release_date"]);
-    console.log(bool);
     if (bool) {
       completeFormStep();
     }
@@ -138,7 +125,7 @@ const Form = () => {
     const value = e.target.checked
       ? {
           title: movie.title,
-          photo: base_image_url + movie.profile_path,
+          poster: base_image_url + movie.profile_path,
           release_date: movie.release_date
         }
       : null;
@@ -147,9 +134,9 @@ const Form = () => {
 
   function onSubmit(data) {
     // display form data on success
-    console.log(JSON.stringify(data, null, 4));
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    completeFormStep();
+    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
+    // completeFormStep();
+    props.onValidation(data);
     return false;
   }
 
@@ -251,7 +238,7 @@ const Form = () => {
                         src={
                           actor.profile_path
                             ? base_image_url + actor.profile_path
-                            : "/film_strip.jpeg"
+                            : "https://upload.wikimedia.org/wikipedia/commons/b/be/Film_strip.jpg"
                         }
                         alt=""
                       />

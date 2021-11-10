@@ -8,7 +8,9 @@ const ActorCard = ({ actor }) => {
   } else if (actor.photo) {
     setImg_path((cur) => cur + actor.photo);
   } else {
-    setImg_path("/film_strip.jpeg");
+    setImg_path(
+      "https://upload.wikimedia.org/wikipedia/commons/b/be/Film_strip.jpg"
+    );
   }
   //todo : gérer le cas où il n'y a aucune image
   return (
