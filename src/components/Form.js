@@ -174,20 +174,24 @@ const Form = (props) => {
     const value = e.target.checked
       ? {
           title: movie.title,
-          poster: movie.backdrop_path
-            ? base_image_url + movie.backdrop_path
-            : "",
+          poster: movie.poster_path ? base_image_url + movie.poster_path : "",
           release_date: movie.release_date
         }
       : null;
     setValue(`similar_movies[${id}]`, value);
   };
+  const cleanTab = (tab) => {
+    return tab.filter((el) => el !== null || el !== undefined);
+  };
 
   function onSubmit(data) {
-    // display form data on success
-    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    // completeFormStep();
+    // TREAT DATA
+    console.log("submit");
+    data.actors = cleanTab(data.actors);
+    data.similar_movies = cleanTab(data.similar_movies);
     props.onValidation(data);
+    reset();
+    setFormStep(0);
     return false;
   }
 
@@ -325,7 +329,7 @@ const Form = (props) => {
             <button type="button" onClick={previousFormStep}>
               Précédent
             </button>
-            <button type="submit">Ajouter</button>
+            <button type="submit">{props.verb}</button>
           </div>
         )}
         {formStep === 0 && (

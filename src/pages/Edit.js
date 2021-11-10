@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
 import Navigation from "../components/Navigation";
 import ServerService from "../services/ServerService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Edit = () => {
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
+  let navigate = useNavigate();
   console.log(id);
 
   useEffect(() => {
@@ -19,7 +22,14 @@ const Edit = () => {
 
   function modifyMovie(data) {
     ServerService.modify(id, data).then((response) => {
-      console.log(response);
+      if (response !== "error") {
+        toast.success("Le film a bien été modifié!");
+      } else {
+        toast.error("Oups, une erreur s'est produite.");
+      }
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     });
   }
 
@@ -27,7 +37,10 @@ const Edit = () => {
     <div>
       <Navigation></Navigation>
       {!movie && <p>Loading</p>}
-      {movie && <Form onValidation={modifyMovie} movie={movie} />}
+      {movie && (
+        <Form onValidation={modifyMovie} movie={movie} verb="Modifier" />
+      )}
+      <ToastContainer theme="dark" autoClose={2000} closeOnClick />
     </div>
   );
 };

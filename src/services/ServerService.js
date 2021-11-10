@@ -5,7 +5,9 @@ const SERVER_URL = "http://localhost:3000/movies";
 const ServerService = {
   fetchServerMovies(filter, value) {
     const url =
-      filter && value ? `${SERVER_URL}?${filter}=${value}` : SERVER_URL;
+      filter && value
+        ? `${SERVER_URL}?${filter}=${value}`
+        : `${SERVER_URL}?_sort=id&_order=desc`;
     return axios
       .get(url)
       .then((response) => response.data)
@@ -28,17 +30,21 @@ const ServerService = {
     return axios
       .post(SERVER_URL, movie)
       .then((response) => response.data)
-      .catch(errorHandler);
+      .catch((err) => {
+        return "error";
+      });
   },
   modify(id, movie) {
     return axios
       .put(`${SERVER_URL}/${id}`, movie)
       .then((response) => response.data)
-      .catch(errorHandler);
+      .catch((err) => {
+        return "error";
+      });
   }
 };
 const errorHandler = (err) => {
-  console.log(err, err.message);
+  console.log(err);
   return "";
 };
 
