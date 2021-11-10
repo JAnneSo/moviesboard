@@ -41,7 +41,7 @@ const Home = () => {
    */
   const changeFilter = (e) => {
     filterRef.current.value = e.target.value;
-    if (filterRef.current.value === "tous") {
+    if (filterRef.current.value === "tout") {
       fetchAllMovies();
     } else {
       if (searchInputRef.current.value !== "") {
@@ -71,7 +71,7 @@ const Home = () => {
       />
       <label>Filtrer par :</label>
       <select ref={filterRef} onChange={changeFilter} defaultValue="title_like">
-        <option value="tous">Tous</option>
+        <option value="tout">Tout</option>
         <option value="title_like">Titre</option>
         <option value="release_date_like">Date de sortie</option>
         <option value="categories_like">Catégories</option>

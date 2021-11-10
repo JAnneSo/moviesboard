@@ -42,7 +42,7 @@ button {
 }
 
 /* inputs */
-input,
+input:not(input[type="checkbox"]),
 button,
 textarea,
 select {

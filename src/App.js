@@ -13,8 +13,8 @@ function App() {
         <Routes>
           <Route path="/" exact="true" element={<Home />} />
           <Route path="/add" exact="true" element={<Add />} />
-          <Route path="/edit" element={<Edit />} />
-          <Route path="/movie" element={<MovieDetails />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
           <Route component={<NotFound />} />
         </Routes>
       </BrowserRouter>

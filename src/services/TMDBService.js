@@ -7,7 +7,7 @@ const TMDBService = {
   fetchMovies(search) {
     return axios
       .get(
-        `${API_URL}search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${search}&sort_by=popularity.desc`
+        `${API_URL}search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${search}&sort_by=popularity.desc&language=fr-FR`
       )
       .then((response) => response.data.results)
       .catch(errorHandlerTab);
@@ -15,7 +15,7 @@ const TMDBService = {
   fetchMovieById(id) {
     return axios
       .get(
-        `${API_URL}movie/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
+        `${API_URL}movie/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr-FR`
       )
       .then((response) => response.data)
       .catch(errorHandler);
@@ -23,7 +23,7 @@ const TMDBService = {
   fetchActorsInMovie(id) {
     return axios
       .get(
-        `${API_URL}movie/${id}/casts?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
+        `${API_URL}movie/${id}/casts?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr-FR`
       )
       .then((response) => response.data.cast)
       .catch(errorHandlerTab);
@@ -31,7 +31,7 @@ const TMDBService = {
   fetchSimilarMovies(id) {
     return axios
       .get(
-        `${API_URL}movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
+        `${API_URL}movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr-FR`
       )
       .then((response) => response.data.results)
       .catch(errorHandlerTab);

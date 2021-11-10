@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useParams } from "react-router";
 import ActorCard from "../components/ActorCard";
 import Navigation from "../components/Navigation";
 import ServerService from "../services/ServerService";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
-  const id = useLocation().search.replace(/\?/g, "");
+  const { id } = useParams();
 
   useEffect(() => {
     ServerService.fetchServerMovieById(id).then((response) =>
