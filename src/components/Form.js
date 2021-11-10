@@ -10,6 +10,7 @@ const Form = (props) => {
   const [formStep, setFormStep] = useState(0);
   const [movieChoices, setMovieChoices] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [id, setId] = useState(null);
   const [actorsInSelectedMovie, setActorsInSelectedMovie] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
   // FORM CONFIG
@@ -63,42 +64,90 @@ const Form = (props) => {
   const previousFormStep = () => {
     setFormStep((cur) => cur - 1);
   };
+  // FETCH MOVIE IF EDIT
+  //-----------------------
+  useEffect(() => {
+    if (props.movie) {
+      let year = props.movie.release_date
+        ? props.movie.release_date.split("-")[0]
+        : undefined;
+      console.log(year);
+      TMDBService.fetchMovies(props.movie.title, false, year)
+        .then((response) => response)
+        .then((response) => {
+          setSelectedMovie(response[0]);
+          setId(response[0].id);
+        });
+    }
+  }, [props.movie, setValue]);
 
   // ----------------------------
   // FETCH MOVIES
   function onKeyDown(e) {
     if (e.target.value.trim() !== "") {
-      TMDBService.fetchMovies(e.target.value).then((response) => {
+      TMDBService.fetchMovies(e.target.value, true).then((response) => {
         response.splice(5);
         setMovieChoices(response);
       });
     }
   }
   function onClick(event) {
-    setValue("title", event.target.innerHTML.split("<span")[0]);
+    //setValue("title", event.target.innerHTML.split("<span")[0]);
     setMovieChoices(null);
+    setId(event.target.id);
     // Au click sur next
-    TMDBService.fetchMovieById(event.target.id).then((response) => {
-      setSelectedMovie(response);
-    });
-    TMDBService.fetchActorsInMovie(event.target.id)
-      .then((response) => response)
-      .then((response) => {
-        response.splice(15);
-        setActorsInSelectedMovie(response);
-      });
-    TMDBService.fetchSimilarMovies(event.target.id)
-      .then((response) => response)
-      .then((response) => {
-        response.splice(10);
-        setSimilarMovies(response);
-      });
+    // TMDBService.fetchMovieById(event.target.id).then((response) => {
+    //   setSelectedMovie(response);
+    // });
+    // TMDBService.fetchActorsInMovie(event.target.id)
+    //   .then((response) => response)
+    //   .then((response) => {
+    //     response.splice(15);
+    //     setActorsInSelectedMovie(response);
+    //   });
+    // TMDBService.fetchSimilarMovies(event.target.id)
+    //   .then((response) => response)
+    //   .then((response) => {
+    //     response.splice(10);
+    //     setSimilarMovies(response);
+    //   });
   }
   useEffect(() => {
+    if (id) {
+      console.log(id);
+      TMDBService.fetchMovieById(id).then((response) => {
+        setSelectedMovie(response);
+      });
+      TMDBService.fetchActorsInMovie(id)
+        .then((response) => response)
+        .then((response) => {
+          response.splice(15);
+          setActorsInSelectedMovie(response);
+        });
+      TMDBService.fetchSimilarMovies(id)
+        .then((response) => response)
+        .then((response) => {
+          response.splice(10);
+          setSimilarMovies(response);
+        });
+    }
+  }, [id]);
+  useEffect(() => {
     if (selectedMovie) {
+      setValue("title", selectedMovie.title);
       setValue("release_date", selectedMovie.release_date);
-      setValue("backdrop", base_image_url + selectedMovie.backdrop_path);
-      setValue("poster", base_image_url + selectedMovie.poster_path);
+      setValue(
+        "backdrop",
+        selectedMovie.backdrop_path
+          ? base_image_url + selectedMovie.backdrop_path
+          : ""
+      );
+      setValue(
+        "poster",
+        selectedMovie.poster_path
+          ? base_image_url + selectedMovie.poster_path
+          : ""
+      );
       setValue("description", selectedMovie.overview);
     }
   }, [selectedMovie, setValue]);
@@ -125,7 +174,9 @@ const Form = (props) => {
     const value = e.target.checked
       ? {
           title: movie.title,
-          poster: base_image_url + movie.profile_path,
+          poster: movie.backdrop_path
+            ? base_image_url + movie.backdrop_path
+            : "",
           release_date: movie.release_date
         }
       : null;

@@ -1,13 +1,17 @@
 import axios from "axios";
 
 const API_URL = "https://api.themoviedb.org/3/";
-export const base_image_url = "https://image.tmdb.org/t/p/original";
+export const base_image_url = "https://image.tmdb.org/t/p/w342";
 
 const TMDBService = {
-  fetchMovies(search) {
+  fetchMovies(search, sort, year) {
     return axios
       .get(
-        `${API_URL}search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${search}&sort_by=popularity.desc&language=fr-FR`
+        `${API_URL}search/movie?api_key=${
+          process.env.REACT_APP_TMDB_API_KEY
+        }&query=${search}
+        ${sort ? "&sort_by=popularity.desc" : ""}
+        ${year ? "&year=" + year : ""}&language=fr-FR`
       )
       .then((response) => response.data.results)
       .catch(errorHandlerTab);

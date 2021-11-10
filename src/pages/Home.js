@@ -80,7 +80,9 @@ const Home = () => {
       {movies && (
         <div>
           {movies.length !== 0 &&
-            movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+            movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} link />
+            ))}
           {movies.length === 0 && <h2>Aucun film trouvé 🥺</h2>}
           {movies === "" && (
             <h2>Une erreur s'est produite. Réessayez plus tard 😉</h2>

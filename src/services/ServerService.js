@@ -29,6 +29,12 @@ const ServerService = {
       .post(SERVER_URL, movie)
       .then((response) => response.data)
       .catch(errorHandler);
+  },
+  modify(id, movie) {
+    return axios
+      .put(`${SERVER_URL}/${id}`, movie)
+      .then((response) => response.data)
+      .catch(errorHandler);
   }
 };
 const errorHandler = (err) => {
