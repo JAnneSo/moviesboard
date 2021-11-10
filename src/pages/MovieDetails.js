@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ActorCard from "../components/ActorCard";
+import DeleteButton from "../components/DeleteButton";
+import EditButton from "../components/EditButton";
 import MovieCard from "../components/MovieCard";
 import Navigation from "../components/Navigation";
 import ServerService from "../services/ServerService";
@@ -21,6 +23,8 @@ const MovieDetails = () => {
       <Navigation></Navigation>
       {movie && (
         <div>
+          <EditButton id={id} />
+          <DeleteButton id={id} title={movie.title} />
           <div>{movie.backdrop && <img src={movie.backdrop} alt="" />}</div>
           <div>{movie.poster && <img src={movie.poster} alt="" />}</div>
           <h1>{movie.title}</h1>

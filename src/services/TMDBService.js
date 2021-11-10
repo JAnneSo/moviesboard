@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://api.themoviedb.org/3/";
 export const base_image_url = "https://image.tmdb.org/t/p/w342";
+export const base_backdrop_url = "https://image.tmdb.org/t/p/original";
 
 const TMDBService = {
   fetchMovies(search, sort, year) {

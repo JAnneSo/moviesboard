@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import TMDBService, { base_image_url } from "../services/TMDBService";
-import { Link } from "react-router-dom";
+import TMDBService, {
+  base_image_url,
+  base_backdrop_url
+} from "../services/TMDBService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -23,7 +25,10 @@ const Form = (props) => {
         /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
         "La date de sortie doit être au format JJ-MM-AAAA"
       ),
-    categories: yup.array().of(yup.string()).required(),
+    categories: yup
+      .array()
+      .of(yup.string())
+      .required("Sélectionner au moins une catégorie"),
     backdrop: yup.string().url(),
     poster: yup.string().url(),
     description: yup.string().required("Le synopsis est requis"),
@@ -82,7 +87,7 @@ const Form = (props) => {
   }, [props.movie, setValue]);
 
   // ----------------------------
-  // FETCH MOVIES
+  // FETCH MOVIES FOR DROPDOWN LIST
   function onKeyDown(e) {
     if (e.target.value.trim() !== "") {
       TMDBService.fetchMovies(e.target.value, true).then((response) => {
@@ -92,26 +97,10 @@ const Form = (props) => {
     }
   }
   function onClick(event) {
-    //setValue("title", event.target.innerHTML.split("<span")[0]);
     setMovieChoices(null);
     setId(event.target.id);
-    // Au click sur next
-    // TMDBService.fetchMovieById(event.target.id).then((response) => {
-    //   setSelectedMovie(response);
-    // });
-    // TMDBService.fetchActorsInMovie(event.target.id)
-    //   .then((response) => response)
-    //   .then((response) => {
-    //     response.splice(15);
-    //     setActorsInSelectedMovie(response);
-    //   });
-    // TMDBService.fetchSimilarMovies(event.target.id)
-    //   .then((response) => response)
-    //   .then((response) => {
-    //     response.splice(10);
-    //     setSimilarMovies(response);
-    //   });
   }
+  // FETCH ALL THE NECESSARY INFORMATION ABOUT THE SELECTED MOVIE
   useEffect(() => {
     if (id) {
       console.log(id);
@@ -139,7 +128,7 @@ const Form = (props) => {
       setValue(
         "backdrop",
         selectedMovie.backdrop_path
-          ? base_image_url + selectedMovie.backdrop_path
+          ? base_backdrop_url + selectedMovie.backdrop_path
           : ""
       );
       setValue(
@@ -151,6 +140,15 @@ const Form = (props) => {
       setValue("description", selectedMovie.overview);
     }
   }, [selectedMovie, setValue]);
+
+  // useEffect(() => {
+  //   if (similarMovies) {
+  //     setValue("similar_movies", similarMovies);
+  //   }
+  //   if (actorsInSelectedMovie) {
+  //     setValue("actors", actorsInSelectedMovie);
+  //   }
+  // }, [actorsInSelectedMovie, similarMovies, setValue]);
 
   async function checkFirstStep() {
     const bool = await trigger(["title", "release_date"]);
@@ -273,7 +271,7 @@ const Form = (props) => {
                       type="checkbox"
                       value={genre.name}
                       {...register("categories")}
-                    />{" "}
+                    />
                     {genre.name}
                   </label>
                 ))}
@@ -343,24 +341,6 @@ const Form = (props) => {
           {JSON.stringify(watch(), null, 2)}
         </pre>
       </form>
-      {formStep === 2 && (
-        <div>
-          <div>
-            <h2>Le film a été ajouté ! 🎉</h2>
-            <Link to="/">Retourner sur la page d'accueil</Link>
-          </div>
-          <button
-            type="button"
-            onClick={() => {
-              reset();
-              setFormStep(0);
-            }}
-          >
-            Ajouter un film
-          </button>
-        </div>
-      )}
-      {/* BUTTON RESET "AJOUTER UN FILM" */}
     </div>
   );
 };

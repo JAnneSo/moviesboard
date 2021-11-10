@@ -34,9 +34,17 @@ const ServerService = {
         return "error";
       });
   },
-  modify(id, movie) {
+  modify(movieId, movie) {
     return axios
-      .put(`${SERVER_URL}/${id}`, movie)
+      .put(`${SERVER_URL}/${movieId}`, movie)
+      .then((response) => response.data)
+      .catch((err) => {
+        return "error";
+      });
+  },
+  delete(movieId) {
+    return axios
+      .delete(`${SERVER_URL}/${movieId}`)
       .then((response) => response.data)
       .catch((err) => {
         return "error";
@@ -44,7 +52,7 @@ const ServerService = {
   }
 };
 const errorHandler = (err) => {
-  console.log(err);
+  //console.log(err);
   return "";
 };
 
