@@ -26,8 +26,9 @@ $light-grey: #e0e0e0;
 body {
   background-color: $backgound;
 }
-p,
-a {
+p:not(.movie-card__content--description p),
+a,
+label {
   font-family: 'Poppins', sans-serif;
   color: $light-black;
 }
@@ -35,13 +36,13 @@ a {
   max-width: 1440px;
   margin: 0 auto;
   @include media-min($tablet-xl) {
-    padding: 0 120px;
+    padding: 60px 120px;
   }
-  @include media-between($tablet-xl, $mobile-xl) {
-    padding: 0 60px;
+  @include media-between($mobile-xl, $tablet-xl) {
+    padding: 60px;
   }
   @include media-max($mobile-xl) {
-    padding: 0 20px;
+    padding: 40px 20px;
   }
 }
 
@@ -53,5 +54,7 @@ h1 {
   line-height: 140%;
   letter-spacing: 0.02em;
   color: $light-black;
-  margin: 60px 0px;
+  @include media-max($mobile-xl) {
+    font-size: 32px;
+  }
 }

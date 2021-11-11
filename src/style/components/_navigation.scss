@@ -3,20 +3,43 @@ header {
   height: 84px;
   display: flex;
   justify-content: space-between;
+  @include media-min($tablet-xl) {
+    padding: 20px 120px;
+  }
+  @include media-between($mobile-xl, $tablet-xl) {
+    padding: 20px 60px;
+  }
+  @include media-max($mobile-xl) {
+    padding: 10px 20px;
+  }
   .logo-desktop {
-    @include media-max($mobile-xl) {
+    @include media-max($tablet-s) {
       display: none;
     }
   }
   .logo-mobile {
-    @include media-min($mobile-xl) {
+    @include media-min($tablet-s) {
       display: none;
     }
   }
   .navigation {
     a {
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 120%;
       &:not(:last-of-type) {
         margin-right: 50px;
+      }
+      &:first-of-type {
+        @include media-max($mobile-s) {
+          display: none;
+        }
+      }
+      @include media-max($tablet-s) {
+        font-size: 16px;
+        &:not(:last-of-type) {
+          margin-right: 20px;
+        }
       }
     }
     .nav-active {

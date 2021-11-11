@@ -1,0 +1,32 @@
+.main-home {
+  h1 {
+    margin-bottom: 40px;
+  }
+  .search-section {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+    input {
+      margin-right: 50px;
+    }
+    label {
+      color: $dark-grey;
+      margin-right: 20px;
+    }
+  }
+  h2 {
+    margin-bottom: 30px;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 120%;
+    color: $light-black;
+    span {
+      color: $dark-grey;
+      &::before {
+        content: "•";
+        margin: 0 10px;
+      }
+    }
+  }
+}

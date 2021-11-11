@@ -62,40 +62,52 @@ const Home = () => {
   return (
     <div>
       <Navigation dark></Navigation>
-      <main className="main">
-        <h1>Bienvenue sur ta bibliothèque</h1>
-        <fieldset>
+      <main className="main main-home">
+        <h1>
+          Bienvenue <br />
+          sur ta bibliothèque
+        </h1>
+        <section className="search-section">
           <input
             type="search"
             ref={searchInputRef}
             placeholder="Rechercher..."
             onKeyDown={onKeyDown}
           />
-          <label>Filtrer par :</label>
-          <select
-            ref={filterRef}
-            onChange={changeFilter}
-            defaultValue="title_like"
-          >
-            <option value="tout">Tout</option>
-            <option value="title_like">Titre</option>
-            <option value="release_date_like">Date de sortie</option>
-            <option value="categories_like">Catégories</option>
-          </select>
-        </fieldset>
+          <fieldset>
+            <label>Filtrer par :</label>
+            <select
+              ref={filterRef}
+              onChange={changeFilter}
+              defaultValue="title_like"
+            >
+              <option value="tout">Tout</option>
+              <option value="title_like">Titre</option>
+              <option value="release_date_like">Date de sortie</option>
+              <option value="categories_like">Catégories</option>
+            </select>
+          </fieldset>
+        </section>
         {movies && (
-          <div>
-            {movies.length !== 0 &&
-              movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} link />
-              ))}
-            {movies.length === 0 && (
-              <h2>Aucun film trouvé dans la bibliothèque 🥺</h2>
+          <section>
+            {movies.length > 0 && (
+              <h2>
+                Mes films<span>{movies.length}</span>
+              </h2>
             )}
-            {movies === "" && (
-              <h2>Une erreur s'est produite. Réessayez plus tard 😉</h2>
-            )}
-          </div>
+            <div>
+              {movies.length !== 0 &&
+                movies.map((movie) => (
+                  <MovieCard key={movie.id} movie={movie} link />
+                ))}
+              {movies.length === 0 && (
+                <h2>Aucun film trouvé dans la bibliothèque 🥺</h2>
+              )}
+              {movies === "" && (
+                <h2>Une erreur s'est produite. Réessayez plus tard 😉</h2>
+              )}
+            </div>
+          </section>
         )}
       </main>
     </div>
