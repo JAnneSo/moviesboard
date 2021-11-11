@@ -1,0 +1,26 @@
+header {
+  padding: 20px 120px;
+  height: 84px;
+  display: flex;
+  justify-content: space-between;
+  .logo-desktop {
+    @include media-max($mobile-xl) {
+      display: none;
+    }
+  }
+  .logo-mobile {
+    @include media-min($mobile-xl) {
+      display: none;
+    }
+  }
+  .navigation {
+    a {
+      &:not(:last-of-type) {
+        margin-right: 50px;
+      }
+    }
+    .nav-active {
+      color: $green;
+    }
+  }
+}

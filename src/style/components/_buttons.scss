@@ -1,0 +1,32 @@
+.round-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(51, 51, 51, 0.6);
+  backdrop-filter: blur(4px);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all .4s ease;
+  &:hover {
+    background-color: $light-black;
+  }
+}
+
+.delete-button {
+  background-image: url('../../icons/delete.svg');
+  margin-left: 10px;
+  &:hover {
+    background-image: url('../../icons/delete_bold.svg');
+    background-color: #c93232;
+  }
+}
+.edit-button {
+  background-image: url('../../icons/pencil.svg');
+  &:hover {
+    background-image: url('../../icons/pencil_bold.svg');
+  }
+}

@@ -1,8 +1,9 @@
 @import './utilities/reset';
-@import './components/formComponent';
-body {
-  background: rgb(148, 184, 182);
-}
+@import './utilities/breakpoints';
+@import './utilities/base';
+@import './components/components';
+@import './pages/pages';
+
 .hidden {
   display: none;
 }

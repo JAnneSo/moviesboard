@@ -1,5 +1,4 @@
 import React from "react";
-import { MdDeleteOutline } from "react-icons/md";
 import ServerService from "../services/ServerService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,8 +29,7 @@ const DeleteButton = ({ id, title }) => {
   }
 
   return (
-    <div onClick={onClick}>
-      <MdDeleteOutline />
+    <div className="round-button delete-button" onClick={onClick}>
       <ToastContainer theme="dark" autoClose={2000} closeOnClick />
     </div>
   );

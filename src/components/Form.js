@@ -15,6 +15,7 @@ const Form = (props) => {
   const [id, setId] = useState(null);
   const [actorsInSelectedMovie, setActorsInSelectedMovie] = useState(null);
   const [similarMovies, setSimilarMovies] = useState(null);
+  const [checked, setChecked] = useState(true);
   // FORM CONFIG
   const validationSchema = yup.object().shape({
     title: yup.string().required("Le titre est requis"),
@@ -172,7 +173,7 @@ const Form = (props) => {
     const value = e.target.checked
       ? {
           title: movie.title,
-          poster: movie.poster_path ? base_image_url + movie.poster_path : "",
+          poster: movie.poster_path ? base_image_url + movie.backdrop_path : "",
           release_date: movie.release_date
         }
       : null;
@@ -201,6 +202,7 @@ const Form = (props) => {
             <fieldset>
               <label htmlFor="title">Titre</label>
               <input
+                type="text"
                 name="title"
                 placeholder="Rechercher un film"
                 onInput={onKeyDown}
@@ -211,7 +213,7 @@ const Form = (props) => {
                   {movieChoices.map((movie) => (
                     <li key={movie.id} id={movie.id} onClick={onClick}>
                       {`${movie.title}`}
-                      <span>{` - ${movie.release_date}`}</span>
+                      <span>{` (${movie.release_date.split("-")[0]})`}</span>
                     </li>
                   ))}
                 </ul>
@@ -270,6 +272,8 @@ const Form = (props) => {
                       name="categories"
                       type="checkbox"
                       value={genre.name}
+                      defaultChecked={checked}
+                      onChange={() => setChecked(!checked)}
                       {...register("categories")}
                     />
                     {genre.name}
@@ -284,7 +288,9 @@ const Form = (props) => {
                     <input
                       type="checkbox"
                       name="actors"
-                      onChange={(e) => updateActorsArray(e, id, actor)}
+                      onChange={(e) => {
+                        updateActorsArray(e, id, actor);
+                      }}
                     />
                     <div>
                       <img
@@ -295,8 +301,8 @@ const Form = (props) => {
                         }
                         alt=""
                       />
-                      <p>{actor.character}</p>
                       <p>{actor.name}</p>
+                      <p>Rôle: {actor.character}</p>
                     </div>
                   </label>
                 ))}
@@ -337,9 +343,7 @@ const Form = (props) => {
             </button>
           </div>
         )}
-        <pre className={formStep < 2 ? "" : "hidden"}>
-          {JSON.stringify(watch(), null, 2)}
-        </pre>
+        <pre>{JSON.stringify(watch(), null, 2)}</pre>
       </form>
     </div>
   );

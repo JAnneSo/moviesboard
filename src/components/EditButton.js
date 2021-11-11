@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BsPencilSquare } from "react-icons/bs";
 
 const EditButton = ({ id }) => {
   return (
@@ -9,9 +8,7 @@ const EditButton = ({ id }) => {
         pathname: `/edit/${id}`
       }}
     >
-      <span>
-        <BsPencilSquare />
-      </span>
+      <div className="round-button edit-button"></div>
     </Link>
   );
 };
