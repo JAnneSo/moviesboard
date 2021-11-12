@@ -77,7 +77,6 @@ const Form = (props) => {
       let year = props.movie.release_date
         ? props.movie.release_date.split("-")[0]
         : undefined;
-      console.log(year);
       TMDBService.fetchMovies(props.movie.title, false, year)
         .then((response) => response)
         .then((response) => {
@@ -185,7 +184,7 @@ const Form = (props) => {
 
   function onSubmit(data) {
     // TREAT DATA
-    console.log("submit");
+    // console.log("submit");
     data.actors = cleanTab(data.actors);
     data.similar_movies = cleanTab(data.similar_movies);
     props.onValidation(data);
@@ -231,8 +230,8 @@ const Form = (props) => {
             </fieldset>
           </section>
         )}
-        {formStep >= 0 && (
-          <section className={formStep === 1 ? "" : "hidden"}>
+        {(props.modify || formStep === 1) && (
+          <section>
             <fieldset>
               <label htmlFor="backdrop">Bannière (url)</label>
               <input
@@ -330,9 +329,11 @@ const Form = (props) => {
         {/* BUTTONS */}
         {formStep === 1 && (
           <div>
-            <button type="button" onClick={previousFormStep}>
-              Précédent
-            </button>
+            {!props.modify && (
+              <button type="button" onClick={previousFormStep}>
+                Précédent
+              </button>
+            )}
             <button type="submit">{props.verb}</button>
           </div>
         )}

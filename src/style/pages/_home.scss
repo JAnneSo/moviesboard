@@ -8,10 +8,18 @@
     margin-bottom: 100px;
     input {
       margin-right: 50px;
+      margin-bottom: 15px;
     }
     label {
       color: $dark-grey;
       margin-right: 20px;
+    }
+    @include media-max($tablet-xs) {
+      margin-bottom: 80px;
+      display: block;
+      label {
+        display: block;
+      }
     }
   }
   h2 {
@@ -27,6 +35,26 @@
         content: "•";
         margin: 0 10px;
       }
+    }
+  }
+  .card-section {
+    display: grid;
+    grid-template-columns: repeat(5, 216px);
+    justify-content: space-between;
+    @include media-between($tablet-xl, $desktop-l) {
+      grid-template-columns: repeat(4, 216px);
+    }
+    @include media-between(800px, $tablet-xl) {
+      grid-template-columns: repeat(3, 216px);
+    }
+    @include media-between($mobile-l, 800px) {
+      grid-template-columns: repeat(2, 216px);
+      justify-content: space-around;
+    }
+    @include media-max($mobile-l) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 }

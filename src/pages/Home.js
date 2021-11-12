@@ -95,7 +95,7 @@ const Home = () => {
                 Mes films<span>{movies.length}</span>
               </h2>
             )}
-            <div>
+            <div className="card-section">
               {movies.length !== 0 &&
                 movies.map((movie) => (
                   <MovieCard key={movie.id} movie={movie} link />

@@ -38,7 +38,7 @@ const Edit = () => {
       <Navigation></Navigation>
       {!movie && <p>Loading</p>}
       {movie && (
-        <Form onValidation={modifyMovie} movie={movie} verb="Modifier" />
+        <Form onValidation={modifyMovie} movie={movie} verb="Modifier" modify />
       )}
       <ToastContainer theme="dark" autoClose={2000} closeOnClick />
     </div>

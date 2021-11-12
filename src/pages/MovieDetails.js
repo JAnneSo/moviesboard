@@ -6,6 +6,9 @@ import EditButton from "../components/EditButton";
 import MovieCard from "../components/MovieCard";
 import Navigation from "../components/Navigation";
 import ServerService from "../services/ServerService";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -18,13 +21,32 @@ const MovieDetails = () => {
     });
   }, [id]);
 
+  let navigate = useNavigate();
+
+  function onDelete() {
+    //let modalResponse = confirm(`Confirme la suppression de:\n${title}`);
+    if (window.confirm(`Confirme la suppression de:\n${movie.title}`)) {
+      //delete the corresponding movie
+      ServerService.delete(id).then((response) => {
+        if (response !== "error") {
+          toast.success(`Le film ${movie.title} a bien été supprimé!`);
+        } else {
+          toast.error("Oups, une erreur s'est produite.");
+        }
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      });
+    }
+  }
+
   return (
     <div>
       <Navigation></Navigation>
       {movie && (
         <div>
           <EditButton id={id} />
-          <DeleteButton id={id} title={movie.title} />
+          <DeleteButton id={id} title={movie.title} onDelete={onDelete} />
           <div>{movie.backdrop && <img src={movie.backdrop} alt="" />}</div>
           <div>{movie.poster && <img src={movie.poster} alt="" />}</div>
           <h1>{movie.title}</h1>

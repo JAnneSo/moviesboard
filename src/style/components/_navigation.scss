@@ -3,14 +3,14 @@ header {
   height: 84px;
   display: flex;
   justify-content: space-between;
-  @include media-min($tablet-xl) {
+  @include media-min($desktop-xs) {
     padding: 20px 120px;
   }
-  @include media-between($mobile-xl, $tablet-xl) {
+  @include media-between($mobile-xl, $desktop-xs) {
     padding: 20px 60px;
   }
   @include media-max($mobile-xl) {
-    padding: 10px 20px;
+    padding: 20px 20px;
   }
   .logo-desktop {
     @include media-max($tablet-s) {

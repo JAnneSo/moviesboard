@@ -1,5 +1,6 @@
 .card {
   display: inline-block;
+  margin-bottom: 40px;
 }
 .movie-card {
   width: 216px;
@@ -22,6 +23,9 @@
     width: 100%;
     z-index: 1;
     transition: top .4s ease;
+    @include media-max($tablet-xl) {
+      top: 0;
+    }
     &.visible {
       top: 0;
     }

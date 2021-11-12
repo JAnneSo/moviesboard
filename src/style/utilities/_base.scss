@@ -25,20 +25,20 @@ $light-grey: #e0e0e0;
 
 body {
   background-color: $backgound;
+  color: $light-black;
 }
 p:not(.movie-card__content--description p),
 a,
 label {
   font-family: 'Poppins', sans-serif;
-  color: $light-black;
 }
 .main {
   max-width: 1440px;
   margin: 0 auto;
-  @include media-min($tablet-xl) {
+  @include media-min($desktop-xs) {
     padding: 60px 120px;
   }
-  @include media-between($mobile-xl, $tablet-xl) {
+  @include media-between($mobile-xl, $desktop-xs) {
     padding: 60px;
   }
   @include media-max($mobile-xl) {
