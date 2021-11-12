@@ -110,7 +110,7 @@ const Form = (props) => {
       TMDBService.fetchActorsInMovie(id)
         .then((response) => response)
         .then((response) => {
-          response.splice(15);
+          response.splice(10);
           setActorsInSelectedMovie(response);
         });
       TMDBService.fetchSimilarMovies(id)
@@ -121,6 +121,7 @@ const Form = (props) => {
         });
     }
   }, [id]);
+
   useEffect(() => {
     if (selectedMovie) {
       setValue("title", selectedMovie.title);
@@ -184,7 +185,6 @@ const Form = (props) => {
 
   function onSubmit(data) {
     // TREAT DATA
-    // console.log("submit");
     data.actors = cleanTab(data.actors);
     data.similar_movies = cleanTab(data.similar_movies);
     props.onValidation(data);

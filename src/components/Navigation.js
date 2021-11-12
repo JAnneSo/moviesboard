@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-const Navigation = ({ dark }) => {
+const Navigation = ({ white }) => {
   return (
     <header>
-      {dark && (
+      {!white && (
         <Link exact="true" to="/">
           <img className="logo-desktop" src="/icons/logo_colored.svg" alt="" />
           <img
@@ -14,7 +14,7 @@ const Navigation = ({ dark }) => {
           />
         </Link>
       )}
-      {!dark && (
+      {white && (
         <Link exact="true" to="/">
           <img className="logo-desktop" src="/icons/logo_white.svg" alt="" />
           <img

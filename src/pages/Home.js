@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <div>
-      <Navigation dark></Navigation>
+      <Navigation></Navigation>
       <main className="main main-home">
         <h1>
           Bienvenue <br />

@@ -41,36 +41,62 @@ const MovieDetails = () => {
   }
 
   return (
-    <div>
-      <Navigation></Navigation>
+    <div className="movie-details-body">
+      <Navigation white></Navigation>
       {movie && (
-        <div>
-          <EditButton id={id} />
-          <DeleteButton id={id} title={movie.title} onDelete={onDelete} />
-          <div>{movie.backdrop && <img src={movie.backdrop} alt="" />}</div>
-          <div>{movie.poster && <img src={movie.poster} alt="" />}</div>
-          <h1>{movie.title}</h1>
-          <p>{movie.release_date}</p>
-          <p>{movie.description}</p>
-          {movie.categories.map((cat) => (
-            <span key={cat}>{cat}</span>
-          ))}
-          {movie.actors.length !== 0 && (
-            <section>
-              <h2>Acteurs</h2>
-              {movie.actors.map((actor) => (
-                <ActorCard key={actor.name} actor={actor} />
-              ))}
+        <div className="movie-detail-container">
+          <div className="backdrop-ctnr">
+            {movie.backdrop && <img src={movie.backdrop} alt="" />}
+          </div>
+
+          <main className="main-movie-details">
+            <section className="movie-info-section">
+              <div className="poster-ctnr">
+                {movie.poster && <img src={movie.poster} alt="" />}
+              </div>
+              <div className="headline">
+                <div className="headline__inner">
+                  <div className="headline__inner--title">
+                    <h1>{movie.title}</h1>
+                    <div className="buttons-ctnr">
+                      <EditButton id={id} />
+                      <DeleteButton
+                        id={id}
+                        title={movie.title}
+                        onDelete={onDelete}
+                      />
+                    </div>
+                  </div>
+                  <div className="date-categories-ctnr">
+                    <p className="release-date">
+                      {new Date(movie.release_date).toLocaleDateString("fr-FR")}
+                    </p>
+                    <p className="categories">{movie.categories.join(", ")}</p>
+                  </div>
+                </div>
+                <div className="synopsis">
+                  <h2>Synopsis</h2>
+                  <p>{movie.description}</p>
+                </div>
+              </div>
             </section>
-          )}
-          {movie.similar_movies.length !== 0 && (
-            <section>
-              <h2>Films similaires</h2>
-              {movie.similar_movies.map((movie, id) => (
-                <MovieCard key={id} movie={movie} />
-              ))}
-            </section>
-          )}
+            {movie.actors.length !== 0 && (
+              <section>
+                <h2>Têtes d’affiche</h2>
+                {movie.actors.map((actor) => (
+                  <ActorCard key={actor.name} actor={actor} />
+                ))}
+              </section>
+            )}
+            {movie.similar_movies.length !== 0 && (
+              <section>
+                <h2>Films similaires</h2>
+                {movie.similar_movies.map((movie, id) => (
+                  <MovieCard key={id} movie={movie} />
+                ))}
+              </section>
+            )}
+          </main>
         </div>
       )}
     </div>

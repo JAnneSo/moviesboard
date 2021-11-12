@@ -3,6 +3,8 @@ header {
   height: 84px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  z-index: 2;
   @include media-min($desktop-xs) {
     padding: 20px 120px;
   }

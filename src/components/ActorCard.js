@@ -3,7 +3,7 @@ import { base_image_url } from "../services/TMDBService";
 
 const ActorCard = ({ actor }) => {
   return (
-    <div>
+    <div className="card">
       {actor && (
         <div>
           {actor.photo && <img src={base_image_url + actor.photo} alt="" />}
