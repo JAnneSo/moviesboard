@@ -13,7 +13,6 @@ const Edit = () => {
   console.log(id);
 
   useEffect(() => {
-    console.log("useEffect");
     ServerService.fetchServerMovieById(id).then((response) => {
       console.log(response);
       setMovie(response);
@@ -48,7 +47,7 @@ const Edit = () => {
             modify
           />
         )}
-        <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+        <ToastContainer autoClose={2500} closeOnClick />
       </main>
     </div>
   );

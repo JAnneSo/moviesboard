@@ -10,7 +10,18 @@ $green: #2e6b5c;
 $light-black: #333333;
 $dark-grey: #828282;
 $light-grey: #e0e0e0;
-
+:root {
+  --toastify-text-color-light: #333333 !important;
+  --toastify-color-success: #2e6b5c !important;
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-color-progress-success: var(--toastify-color-success);
+}
+.toast-success-container {
+  border: 1px solid #2e6b5c !important;
+}
+.Toastify__progress-bar--success {
+  background-color: #2e6b5c !important;
+}
 @mixin imgFit() {
   width: 100%;
   height: 100%;
@@ -48,7 +59,7 @@ h1 {
   font-style: normal;
   font-weight: normal;
   font-size: 46px;
-  line-height: 140%;
+  // line-height: 140%;
   letter-spacing: 0.02em;
   color: $light-black;
   @include media-max($mobile-xl) {

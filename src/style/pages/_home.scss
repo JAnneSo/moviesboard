@@ -9,17 +9,25 @@
     input {
       margin-right: 50px;
       margin-bottom: 15px;
+      width: 400px;
+      max-width: 100%;
     }
     label {
       color: $dark-grey;
       margin-right: 20px;
     }
-    @include media-max($tablet-xs) {
+    @include media-max($tablet-m) {
       margin-bottom: 80px;
       display: block;
       label {
         display: block;
       }
+    }
+    select {
+      padding: 15px 20px;
+      height: 56px;
+      background: white;
+      -webkit-appearance: none;
     }
   }
   h2 {

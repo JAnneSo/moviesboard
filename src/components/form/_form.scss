@@ -17,9 +17,7 @@
     margin-bottom: 12px;
     display: block;
   }
-  //   fieldset {
-  //     margin-bottom: 50px;
-  //   }
+
   button {
     padding: 17px 20px;
     // width: 174px;
@@ -72,6 +70,14 @@
     input {
       width: 100%;
     }
+    input[type=date] {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      &::-webkit-calendar-picker-indicator {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
     button {
       @include media-min(800px) {
         position: relative;
@@ -123,15 +129,27 @@
       flex-wrap: wrap;
     }
     label {
-      background: #ffffff;
-      border: 2px solid $green;
-      border-radius: 10px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      width: auto;
+      position: relative;
       margin-right: 12px;
       margin-bottom: 10px;
+      input {
+        position: absolute;
+        left: 20px;
+        top: calc(50% - 14px);
+        &:checked + div {
+          border-color: $green;
+        }
+      }
+      div {
+        background: #ffffff;
+        border: 2px solid $light-grey;
+        border-radius: 10px;
+        padding: 20px 20px 20px 56px;
+        cursor: pointer;
+        &:hover {
+          border-color: $green;
+        }
+      }
     }
   }
   //--------------------------
@@ -163,10 +181,12 @@
     grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
     justify-items: center;
     gap: 5px;
-    // .checkbox-card {
-    //   &:not(:last-of-type) {
-    //     margin-right: 20px;
-    //   }
-    // }
   }
+}
+.previous-button {
+  margin-right: 20px;
+}
+.previous-button,
+.submit-button {
+  margin-bottom: 20px;
 }

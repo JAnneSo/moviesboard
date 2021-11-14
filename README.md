@@ -1,4 +1,4 @@
-# MoviesBoard - management of a film library
+# MoviesBoard - Application for managing a film library
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -7,7 +7,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [Overview](#overview)
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
-  - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [Useful resources](#useful-resources)
@@ -18,11 +17,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Users should be able to:
 
--
+- Display a complete list of library movies
+- Display the details of a film from the library
+- Add a new nomie to the library
+- Modify a movie from the library
+- Delete a movie from the library
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screencapture.png)
 
 ## My process
 
@@ -32,10 +35,10 @@ Users should be able to:
 - CSS / Sass
 - JavaScript
 - [React](https://reactjs.org/) - JS library
-- API - [TMDB](https://www.themoviedb.org)
+- API - [TheMovieDataBase](https://www.themoviedb.org)
 
 ### Useful resources
 
 - [React Hook Form](https://react-hook-form.com)
 - [Yup](https://github.com/jquense/yup)
-- [React-toastify](https://fkhadra.github.io/react-toastify/introduction/) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [React-toastify](https://fkhadra.github.io/react-toastify/introduction/) - To send user notification when they add or delete a movie from the library

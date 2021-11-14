@@ -230,7 +230,11 @@ const Form = (props) => {
                     {movieChoices.map((movie) => (
                       <li key={movie.id} id={movie.id} onClick={onClick}>
                         {`${movie.title}`}
-                        <span>{` (${movie.release_date.split("-")[0]})`}</span>
+                        {movie.release_date && (
+                          <span>{` (${
+                            movie.release_date.split("-")[0]
+                          })`}</span>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -281,7 +285,9 @@ const Form = (props) => {
                         onChange={() => setChecked(!checked)}
                         {...register("categories")}
                       />
-                      <span>{genre.name}</span>
+                      <div>
+                        <span>{genre.name}</span>
+                      </div>
                     </label>
                   ))}
               </div>

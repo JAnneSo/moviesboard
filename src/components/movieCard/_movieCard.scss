@@ -52,6 +52,7 @@
     overflow: hidden;
     img {
       @include imgFit;
+      border-radius: 20px;
       transform: scale(1);
       transition: all .4s ease;
     }
@@ -95,7 +96,7 @@
       @include overflowEllipsis;
     }
     &--title {
-      margin-bottom: 6px;
+      padding-bottom: 6px;
     }
     &--date {
       color: $dark-grey;

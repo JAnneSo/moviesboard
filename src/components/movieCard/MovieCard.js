@@ -88,7 +88,7 @@ const MovieCard = ({ movie, link }) => {
           </figcaption>
         </figure>
       )}
-      <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+      <ToastContainer autoClose={2500} closeOnClick />
     </div>
   );
 };

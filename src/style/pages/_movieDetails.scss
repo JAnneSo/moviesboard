@@ -29,11 +29,12 @@
     height: 480px;
     position: relative;
     transition: height .4s ease;
-    @include media-min($desktop-xl) {
+    @include media-min(1700px) {
       height: 700px;
     }
     img {
       @include imgFit;
+      object-fit: top;
     }
     &::after {
       content: "";
@@ -94,6 +95,9 @@
       }
       .buttons-ctnr {
         display: flex;
+        @include media-min($tablet-xl) {
+          margin-left: 20px;
+        }
         @include media-max($tablet-xl) {
           position: absolute;
           top: -64px;

@@ -44,8 +44,7 @@ button {
 /* inputs */
 input,
 button,
-textarea,
-select {
+textarea {
   font-style: inherit;
   -webkit-padding-start: 0;
   align-items: flex-start;
@@ -54,6 +53,9 @@ select {
   outline: none;
   margin: 0;
   //border: none;
+}
+select {
+  outline: none;
 }
 
 textarea {

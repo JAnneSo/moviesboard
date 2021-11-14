@@ -28,7 +28,7 @@ const Add = () => {
       <main className="main main-form">
         <h1>Ajouter un film</h1>
         <Form onValidation={addMovie} verb="Ajouter à la bibliothèque" />
-        <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+        <ToastContainer autoClose={2500} closeOnClick />
       </main>
     </div>
   );

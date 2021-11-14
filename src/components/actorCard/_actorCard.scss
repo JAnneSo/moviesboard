@@ -16,11 +16,10 @@
     line-height: 120%;
     p {
       overflow: hidden;
-      //@include overflowEllipsis;
+      padding-bottom: 6px;
     }
   }
   &__info--character {
     color: $dark-grey;
-    margin-top: 6px;
   }
 }

@@ -24,7 +24,6 @@ const MovieDetails = () => {
   let navigate = useNavigate();
 
   function onDelete() {
-    //let modalResponse = confirm(`Confirme la suppression de:\n${title}`);
     if (window.confirm(`Confirme la suppression de:\n${movie.title}`)) {
       //delete the corresponding movie
       ServerService.delete(id).then((response) => {
