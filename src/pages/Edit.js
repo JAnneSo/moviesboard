@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Form from "../components/Form";
-import Navigation from "../components/Navigation";
+import Form from "../components/form/Form";
+import Navigation from "../components/navigation/Navigation";
 import ServerService from "../services/ServerService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,11 +36,20 @@ const Edit = () => {
   return (
     <div>
       <Navigation></Navigation>
-      {!movie && <p>Loading</p>}
-      {movie && (
-        <Form onValidation={modifyMovie} movie={movie} verb="Modifier" modify />
-      )}
-      <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+      <main className="main main-form">
+        <h1>Modifier un film</h1>
+        {!movie && movie !== "" && <p>Loading</p>}
+        {movie === "" && <p>Ce film n'existe pas dans votre bibliothèque</p>}
+        {movie && (
+          <Form
+            onValidation={modifyMovie}
+            movie={movie}
+            verb="Modifier"
+            modify
+          />
+        )}
+        <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+      </main>
     </div>
   );
 };

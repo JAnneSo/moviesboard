@@ -1,0 +1,26 @@
+.actor-card {
+  width: 171.9px;
+  &__img-ctnr {
+    height: 242.45px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: grey;
+    img {
+      @include imgFit;
+    }
+  }
+  &__info {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 120%;
+    p {
+      overflow: hidden;
+      //@include overflowEllipsis;
+    }
+  }
+  &__info--character {
+    color: $dark-grey;
+    margin-top: 6px;
+  }
+}

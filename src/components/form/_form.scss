@@ -1,0 +1,152 @@
+.main-form h1 {
+  margin-bottom: 60px;
+}
+.form {
+  h2 {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 140%;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: $dark-grey;
+    margin-bottom: 30px;
+  }
+  .input-label {
+    font-size: 17px;
+    line-height: 140%;
+    margin-bottom: 12px;
+    display: block;
+  }
+  //   fieldset {
+  //     margin-bottom: 50px;
+  //   }
+  button {
+    padding: 17px 20px;
+    // width: 174px;
+    // height: 54px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 120%;
+    height: 54px;
+    &.next-button {
+      width: 174px;
+      background: $green;
+      box-shadow: inset -5.22516e-16px -10px 10px rgba(51, 51, 51, 0.1),
+        inset 5.22516e-16px 10px 10px rgba(255, 255, 255, 0.1);
+
+      //background: #cccccc;
+    }
+    &.previous-button {
+      background: $light-black;
+      box-shadow: inset -5.22516e-16px -10px 10px rgba(51, 51, 51, 0.1),
+        inset 5.22516e-16px 10px 10px rgba(255, 255, 255, 0.1);
+    }
+    &.submit-button {
+      background: $green;
+      box-shadow: inset -5.22516e-16px -10px 10px rgba(51, 51, 51, 0.1),
+        inset 5.22516e-16px 10px 10px rgba(255, 255, 255, 0.1);
+    }
+  }
+  //--------------------------
+  // STEP
+  .section-step1 {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    &__input {
+      flex-grow: 1;
+      width: calc(100% - 174px);
+      display: grid;
+      grid-template-columns: 48% 48%;
+      gap: 2%;
+    }
+    input {
+      width: 100%;
+    }
+    button {
+      position: relative;
+      top: 36px;
+    }
+    .title-field {
+      position: relative;
+      input {
+        z-index: 2;
+      }
+    }
+    .title-suggestion-list {
+      position: absolute;
+      top: 97%;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid $light-grey;
+      border-radius: 10px;
+      padding: 10px 0;
+      z-index: 1;
+      li {
+        padding: 10px 20px;
+        font-size: 17px;
+        line-height: 140%;
+        color: $dark-grey;
+        background: white;
+        &:hover {
+          background: $light-grey;
+        }
+      }
+    }
+  }
+  //--------------------------
+  // CATEGORIES
+  .categories-field {
+    margin-bottom: 50px;
+    &__grid {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    label {
+      background: #ffffff;
+      border: 2px solid $green;
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      width: auto;
+      margin-right: 12px;
+      margin-bottom: 10px;
+    }
+  }
+  //--------------------------
+  // IMAGES
+  .image-field {
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 2%;
+    input {
+      width: 100%;
+    }
+  }
+  //--------------------------
+  // OVERVIEW
+  .overview-field {
+    margin-bottom: 50px;
+    textarea {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  //--------------------------
+  // GRID
+  .form__grid {
+    display: flex;
+    flex-wrap: wrap;
+    .checkbox-card {
+      &:not(:last-of-type) {
+        margin-right: 20px;
+      }
+    }
+  }
+}

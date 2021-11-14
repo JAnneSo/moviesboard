@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import DeleteButton from "./DeleteButton";
-import EditButton from "./EditButton";
-import ServerService from "../services/ServerService";
+import DeleteButton from "../buttons/DeleteButton";
+import EditButton from "../buttons/EditButton";
+import ServerService from "../../services/ServerService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -52,7 +52,7 @@ const MovieCard = ({ movie, link }) => {
                 pathname: `/movie/${movie.id}`
               }}
             >
-              <img src={movie.poster} alt="" />
+              {movie.poster !== "" && <img src={movie.poster} alt="" />}
               <div
                 className={`movie-card__content--description${
                   checked ? " visible" : ""
@@ -81,10 +81,14 @@ const MovieCard = ({ movie, link }) => {
       )}
       {!link && (
         <figure className="similar-movie-card">
-          {movie.poster && <img src={movie.poster} alt="" />}
-          <figcaption>
-            <h2>{movie.title}</h2>
-            <p>{movie.release_date.split("-")[0]}</p>
+          <div className="similar-movie-card__img-ctnr">
+            {movie.poster && <img src={movie.poster} alt="" />}
+          </div>
+          <figcaption className="movie-card__text">
+            <p className="movie-card__text--title">{movie.title}</p>
+            <p className="movie-card__text--date">
+              {movie.release_date.split("-")[0]}
+            </p>
           </figcaption>
         </figure>
       )}

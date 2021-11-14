@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Form from "../components/Form";
-import Navigation from "../components/Navigation";
+import Form from "../components/form/Form";
+import Navigation from "../components/navigation/Navigation";
 import ServerService from "../services/ServerService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,8 +25,11 @@ const Add = () => {
   return (
     <div>
       <Navigation></Navigation>
-      <Form onValidation={addMovie} verb="Ajouter à la bibliothèque" />
-      <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+      <main className="main main-form">
+        <h1>Ajouter un film</h1>
+        <Form onValidation={addMovie} verb="Ajouter à la bibliothèque" />
+        <ToastContainer theme="dark" autoClose={2000} closeOnClick />
+      </main>
     </div>
   );
 };

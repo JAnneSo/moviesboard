@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import ActorCard from "../components/ActorCard";
-import DeleteButton from "../components/DeleteButton";
-import EditButton from "../components/EditButton";
-import MovieCard from "../components/MovieCard";
-import Navigation from "../components/Navigation";
+import ActorCard from "../components/actorCard/ActorCard";
+import DeleteButton from "../components/buttons/DeleteButton";
+import EditButton from "../components/buttons/EditButton";
+import MovieCard from "../components/movieCard/MovieCard";
+import Navigation from "../components/navigation/Navigation";
 import ServerService from "../services/ServerService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -83,17 +83,21 @@ const MovieDetails = () => {
             {movie.actors.length !== 0 && (
               <section>
                 <h2>Têtes d’affiche</h2>
-                {movie.actors.map((actor) => (
-                  <ActorCard key={actor.name} actor={actor} />
-                ))}
+                <div className="actors-grid">
+                  {movie.actors.map((actor) => (
+                    <ActorCard key={actor.name} actor={actor} />
+                  ))}
+                </div>
               </section>
             )}
             {movie.similar_movies.length !== 0 && (
               <section>
                 <h2>Films similaires</h2>
-                {movie.similar_movies.map((movie, id) => (
-                  <MovieCard key={id} movie={movie} />
-                ))}
+                <div className="similar-movies-grid">
+                  {movie.similar_movies.map((movie, id) => (
+                    <MovieCard key={id} movie={movie} />
+                  ))}
+                </div>
               </section>
             )}
           </main>

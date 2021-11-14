@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import MovieCard from "../components/MovieCard";
-import Navigation from "../components/Navigation";
+import MovieCard from "../components/movieCard/MovieCard";
+import Navigation from "../components/navigation/Navigation";
 import ServerService from "../services/ServerService";
 
 const Home = () => {

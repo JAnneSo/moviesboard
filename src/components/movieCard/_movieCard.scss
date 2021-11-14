@@ -1,6 +1,9 @@
 .card {
   display: inline-block;
   margin-bottom: 40px;
+  @include media-max($tablet-s) {
+    margin-bottom: 15px;
+  }
 }
 .movie-card {
   width: 216px;
@@ -96,6 +99,18 @@
     }
     &--date {
       color: $dark-grey;
+    }
+  }
+}
+.similar-movie-card {
+  max-width: 300px;
+  width: 100%;
+  &__img-ctnr {
+    height: 167.8px;
+    border-radius: 10px;
+    overflow: hidden;
+    img {
+      @include imgFit;
     }
   }
 }

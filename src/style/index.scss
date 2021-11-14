@@ -1,7 +1,12 @@
 @import './utilities/reset';
 @import './utilities/breakpoints';
 @import './utilities/base';
-@import './components/components';
+@import '../components/actorCard/actorCard';
+@import '../components/buttons/buttons';
+@import '../components/form/formComponent';
+@import '../components/form/form';
+@import '../components/movieCard/movieCard';
+@import '../components/navigation/navigation';
 @import './pages/pages';
 
 .hidden {
@@ -9,7 +14,4 @@
 }
 .error {
   color: red;
-}
-form img {
-  height: 40px;
 }
