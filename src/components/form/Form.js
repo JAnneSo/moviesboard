@@ -40,16 +40,13 @@ const Form = (props) => {
         character: yup.string()
       })
     ),
-    similar_movies: yup
-      .array()
-      .of(
-        yup.object({
-          title: yup.string(),
-          poster: yup.string().url(),
-          release_date: yup.string()
-        })
-      )
-      .required()
+    similar_movies: yup.array().of(
+      yup.object({
+        title: yup.string(),
+        poster: yup.string().url(),
+        release_date: yup.string()
+      })
+    )
   });
   const formOptions = {
     resolver: yupResolver(validationSchema),
@@ -170,6 +167,7 @@ const Form = (props) => {
   };
 
   const updateSimilarMoviesArray = (e, id, movie) => {
+    console.log("movie");
     const value = e.target.checked
       ? {
           title: movie.title,
@@ -196,8 +194,9 @@ const Form = (props) => {
     data.similar_movies = cleanTab(data.similar_movies);
     // SEND DATA
     props.onValidation(data);
-    reset();
     setFormStep(0);
+    reset();
+
     return false;
   }
 
@@ -335,34 +334,35 @@ const Form = (props) => {
               <div className="form__grid">
                 {actorsInSelectedMovie &&
                   actorsInSelectedMovie.map((actor, id) => (
-                    <label key={id} className="checkbox-card">
-                      <div className="checkbox-card__img-ctnr">
-                        <input
-                          type="checkbox"
-                          name="actors"
-                          className="custom-check"
-                          onChange={(e) => {
-                            updateActorsArray(e, id, actor);
-                          }}
-                        />
-
-                        <img
-                          src={
-                            actor.profile_path
-                              ? base_image_url + actor.profile_path
-                              : "https://upload.wikimedia.org/wikipedia/commons/b/be/Film_strip.jpg"
-                          }
-                          alt=""
-                        />
-                        {/* <div className="checkbox-card__overlay"></div> */}
-                      </div>
-                      <div className="checkbox-card__text">
-                        <p className="checkbox-card__text--title">
-                          {actor.name}
-                        </p>
-                        <p className="checkbox-card__text--character">
-                          {actor.character}
-                        </p>
+                    <label key={id} className="checkbox-card-ctnr">
+                      <input
+                        type="checkbox"
+                        name="actors"
+                        className="custom-check"
+                        onChange={(e) => {
+                          updateActorsArray(e, id, actor);
+                        }}
+                      />
+                      <div className="checkbox-card">
+                        <div className="checkbox-card__img-ctnr">
+                          <img
+                            src={
+                              actor.profile_path
+                                ? base_image_url + actor.profile_path
+                                : "https://upload.wikimedia.org/wikipedia/commons/b/be/Film_strip.jpg"
+                            }
+                            alt=""
+                          />
+                          <div className="checkbox-card__overlay"></div>
+                        </div>
+                        <div className="checkbox-card__text">
+                          <p className="checkbox-card__text--title">
+                            {actor.name}
+                          </p>
+                          <p className="checkbox-card__text--character">
+                            {actor.character}
+                          </p>
+                        </div>
                       </div>
                     </label>
                   ))}
@@ -374,27 +374,30 @@ const Form = (props) => {
               <div className="form__grid">
                 {similarMovies &&
                   similarMovies.map((movie, id) => (
-                    <label key={id} className="checkbox-card">
-                      <div className="checkbox-card__img-ctnr">
-                        <input
-                          type="checkbox"
-                          name="similar_movies"
-                          className="custom-check"
-                          onChange={(e) =>
-                            updateSimilarMoviesArray(e, id, movie)
-                          }
-                        />
-                        <div className="checkbox-card__overlay"></div>
-                        <img src={base_image_url + movie.poster_path} alt="" />
-                      </div>
+                    <label key={id} className="checkbox-card-ctnr">
+                      <input
+                        type="checkbox"
+                        name="similar_movies"
+                        className="custom-check"
+                        onChange={(e) => updateSimilarMoviesArray(e, id, movie)}
+                      />
+                      <div className="checkbox-card">
+                        <div className="checkbox-card__img-ctnr">
+                          <div className="checkbox-card__overlay"></div>
+                          <img
+                            src={base_image_url + movie.poster_path}
+                            alt=""
+                          />
+                        </div>
 
-                      <div className="checkbox-card__text">
-                        <p className="checkbox-card__text--title">
-                          {movie.title}
-                        </p>
-                        <p className="checkbox-card__text--character">
-                          {movie.release_date}
-                        </p>
+                        <div className="checkbox-card__text">
+                          <p className="checkbox-card__text--title">
+                            {movie.title}
+                          </p>
+                          <p className="checkbox-card__text--character">
+                            {movie.release_date}
+                          </p>
+                        </div>
                       </div>
                     </label>
                   ))}

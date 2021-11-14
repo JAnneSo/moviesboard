@@ -47,37 +47,66 @@ textarea {
     background-position: center;
   }
 }
-.checkbox-card {
-  position: relative;
+
+.checkbox-card-ctnr {
   width: 132px;
-  overflow: hidden;
-  display: inline-block;
+  position: relative;
   margin-bottom: 50px;
+  @include media-max($tablet-s) {
+    margin-bottom: 30px;
+  }
+  &:hover {
+    .checkbox-card__img-ctnr {
+      border: 2px solid $green;
+    }
+    .checkbox-card__overlay {
+      opacity: 0.25;
+    }
+  }
   input {
     position: absolute;
     top: 10px;
     left: 10px;
+    z-index: 2;
+    &:checked ~ .checkbox-card {
+      .checkbox-card__img-ctnr {
+        border: 2px solid $green;
+      }
+
+      .checkbox-card__overlay {
+        opacity: 0.25;
+      }
+    }
   }
+}
+.checkbox-card {
+  overflow: hidden;
+  display: inline-block;
+
   &__img-ctnr {
+    position: relative;
     width: 132px;
     height: 187px;
     border: 2px solid transparent;
     border-radius: 10px;
     overflow: hidden;
+    transition: all .4s ease;
     img {
       @include imgFit;
     }
   }
-  /*&__overlay {
+  &__overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 132px;
     height: 187px;
+    border-radius: 10px;
     background: $green;
-    opacity: 0.25;
+    opacity: 0;
     z-index: 1;
-  }*/
+    transition: opacity .4s ease;
+  }
   &__text {
     overflow: hidden;
     font-weight: 500;

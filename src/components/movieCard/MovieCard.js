@@ -38,11 +38,7 @@ const MovieCard = ({ movie, link }) => {
             </label>
             <div>
               <EditButton id={movie.id} />
-              <DeleteButton
-                id={movie.id}
-                title={movie.title}
-                onDelete={onDelete}
-              />
+              <DeleteButton onDelete={onDelete} />
             </div>
           </div>
           {/* CONTENT */}

@@ -116,9 +116,12 @@
         }
         .categories {
           @include media-min($tablet-s) {
+            position: relative;
+            padding-left: 30px;
             &::before {
               content: "•";
-              margin: 0 10px;
+              position: absolute;
+              left: 12px;
             }
           }
           @include media-max($tablet-s) {

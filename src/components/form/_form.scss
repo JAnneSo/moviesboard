@@ -53,32 +53,41 @@
   // STEP
   .section-step1 {
     margin-bottom: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+
+    @include media-min(800px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
     &__input {
-      flex-grow: 1;
-      width: calc(100% - 174px);
-      display: grid;
-      grid-template-columns: 48% 48%;
-      gap: 2%;
+      @include media-min(800px) {
+        flex-grow: 1;
+        width: calc(100% - 174px);
+        display: grid;
+        grid-template-columns: 48% 48%;
+        gap: 2%;
+      }
     }
     input {
       width: 100%;
     }
     button {
-      position: relative;
-      top: 36px;
+      @include media-min(800px) {
+        position: relative;
+        top: 36px;
+      }
     }
     .title-field {
       position: relative;
+
       input {
         z-index: 2;
       }
     }
     .title-suggestion-list {
       position: absolute;
-      top: 97%;
+      top: 99%;
       left: 0;
       width: 100%;
       background: #ffffff;
@@ -86,6 +95,8 @@
       border-radius: 10px;
       padding: 10px 0;
       z-index: 1;
+      max-height: calc(5 * 43px + 20px);
+      overflow: auto;
       li {
         padding: 10px 20px;
         font-size: 17px;
@@ -96,6 +107,11 @@
           background: $light-grey;
         }
       }
+    }
+  }
+  fieldset {
+    @include media-max(800px) {
+      margin-bottom: 30px;
     }
   }
   //--------------------------
@@ -121,10 +137,12 @@
   //--------------------------
   // IMAGES
   .image-field {
-    margin-bottom: 50px;
-    display: grid;
-    grid-template-columns: 48% 48%;
-    gap: 2%;
+    @include media-min(800px) {
+      margin-bottom: 50px;
+      display: grid;
+      grid-template-columns: 48% 48%;
+      gap: 2%;
+    }
     input {
       width: 100%;
     }
@@ -141,12 +159,14 @@
   //--------------------------
   // GRID
   .form__grid {
-    display: flex;
-    flex-wrap: wrap;
-    .checkbox-card {
-      &:not(:last-of-type) {
-        margin-right: 20px;
-      }
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    justify-items: center;
+    gap: 5px;
+    // .checkbox-card {
+    //   &:not(:last-of-type) {
+    //     margin-right: 20px;
+    //   }
+    // }
   }
 }
