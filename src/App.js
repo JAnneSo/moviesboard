@@ -1,9 +1,9 @@
 import "./style/index.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Add from "./pages/Add";
-import Edit from "./pages/Edit";
-import MovieDetails from "./pages/MovieDetails";
+import Home from "./pages/home/Home";
+import Add from "./pages/add/Add";
+import Edit from "./pages/edit/Edit";
+import MovieDetails from "./pages/movieDetails/MovieDetails";
 import NotFound from "./pages/NotFound";
 
 function App() {

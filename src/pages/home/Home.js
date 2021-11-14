@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import MovieCard from "../components/movieCard/MovieCard";
-import Navigation from "../components/navigation/Navigation";
-import ServerService from "../services/ServerService";
+import MovieCard from "../../components/movieCard/MovieCard";
+import Navigation from "../../components/navigation/Navigation";
+import ServerService from "../../services/ServerService";
 
 const Home = () => {
   // Variables

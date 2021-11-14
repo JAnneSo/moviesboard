@@ -7,11 +7,5 @@
 @import '../components/form/form';
 @import '../components/movieCard/movieCard';
 @import '../components/navigation/navigation';
-@import './pages/pages';
-
-.hidden {
-  display: none;
-}
-.error {
-  color: red;
-}
+@import '../pages/home/home';
+@import '../pages/movieDetails/movieDetails';

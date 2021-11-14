@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import ActorCard from "../components/actorCard/ActorCard";
-import DeleteButton from "../components/buttons/DeleteButton";
-import EditButton from "../components/buttons/EditButton";
-import MovieCard from "../components/movieCard/MovieCard";
-import Navigation from "../components/navigation/Navigation";
-import ServerService from "../services/ServerService";
+import ActorCard from "../../components/actorCard/ActorCard";
+import DeleteButton from "../../components/buttons/DeleteButton";
+import EditButton from "../../components/buttons/EditButton";
+import MovieCard from "../../components/movieCard/MovieCard";
+import Navigation from "../../components/navigation/Navigation";
+import ServerService from "../../services/ServerService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";

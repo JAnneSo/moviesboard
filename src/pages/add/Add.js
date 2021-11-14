@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Form from "../components/form/Form";
-import Navigation from "../components/navigation/Navigation";
-import ServerService from "../services/ServerService";
+import Form from "../../components/form/Form";
+import Navigation from "../../components/navigation/Navigation";
+import ServerService from "../../services/ServerService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
